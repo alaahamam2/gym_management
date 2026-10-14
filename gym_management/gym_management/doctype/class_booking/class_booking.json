@@ -2,7 +2,6 @@
  "actions": [],
  "allow_rename": 1,
  "creation": "2026-10-11 17:25:46.869493",
- "custom": 1,
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
@@ -57,8 +56,8 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-10-11 17:29:49.743093",
- "modified_by": "alaahamam743@gmail.com",
+ "modified": "2026-10-14 22:28:37.931340",
+ "modified_by": "Administrator",
  "module": "Gym Management",
  "name": "Class Booking",
  "owner": "alaahamam743@gmail.com",

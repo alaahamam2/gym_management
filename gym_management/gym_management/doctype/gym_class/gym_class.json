@@ -2,7 +2,6 @@
  "actions": [],
  "allow_rename": 1,
  "creation": "2026-10-11 16:51:56.502466",
- "custom": 1,
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
@@ -41,8 +40,8 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-10-11 16:54:20.843098",
- "modified_by": "alaahamam743@gmail.com",
+ "modified": "2026-10-14 22:28:37.946615",
+ "modified_by": "Administrator",
  "module": "Gym Management",
  "name": "Gym Class",
  "owner": "alaahamam743@gmail.com",

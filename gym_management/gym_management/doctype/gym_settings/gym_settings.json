@@ -1,7 +1,6 @@
 {
  "actions": [],
  "creation": "2026-10-11 15:52:16.077426",
- "custom": 1,
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
@@ -51,8 +50,8 @@
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2026-10-11 16:04:43.200781",
- "modified_by": "alaahamam743@gmail.com",
+ "modified": "2026-10-14 22:28:37.949707",
+ "modified_by": "Administrator",
  "module": "Gym Management",
  "name": "Gym Settings",
  "owner": "alaahamam743@gmail.com",

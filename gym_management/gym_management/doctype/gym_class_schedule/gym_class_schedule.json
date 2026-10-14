@@ -2,7 +2,6 @@
  "actions": [],
  "allow_rename": 1,
  "creation": "2026-10-11 16:55:12.910729",
- "custom": 1,
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
@@ -43,8 +42,8 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-10-11 16:57:29.132678",
- "modified_by": "alaahamam743@gmail.com",
+ "modified": "2026-10-14 22:28:37.944153",
+ "modified_by": "Administrator",
  "module": "Gym Management",
  "name": "Gym Class Schedule",
  "owner": "alaahamam743@gmail.com",
