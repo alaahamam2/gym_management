@@ -1,0 +1,107 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-10-11 17:17:37.668079",
+ "custom": 1,
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "gym_class",
+  "trainer",
+  "room",
+  "session_date",
+  "start_time",
+  "end_time",
+  "capacity",
+  "booked_count",
+  "status"
+ ],
+ "fields": [
+  {
+   "fieldname": "gym_class",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "gym_class",
+   "options": "Gym Class",
+   "reqd": 1
+  },
+  {
+   "fieldname": "trainer",
+   "fieldtype": "Link",
+   "label": "trainer",
+   "options": "Gym Trainer"
+  },
+  {
+   "fieldname": "room",
+   "fieldtype": "Link",
+   "label": "room",
+   "options": "Gym Room"
+  },
+  {
+   "fieldname": "session_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "session_date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "start_time",
+   "fieldtype": "Time",
+   "in_list_view": 1,
+   "label": "start_time",
+   "reqd": 1
+  },
+  {
+   "fieldname": "end_time",
+   "fieldtype": "Time",
+   "in_list_view": 1,
+   "label": "end_time",
+   "reqd": 1
+  },
+  {
+   "fieldname": "capacity",
+   "fieldtype": "Int",
+   "label": "capacity"
+  },
+  {
+   "default": "0",
+   "fieldname": "booked_count",
+   "fieldtype": "Int",
+   "label": "booked_count",
+   "read_only": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "status",
+   "options": "Plaintext\nScheduled\nCompleted\nCancelled"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-10-11 17:25:04.281180",
+ "modified_by": "alaahamam743@gmail.com",
+ "module": "Gym Management",
+ "name": "Class Session",
+ "owner": "alaahamam743@gmail.com",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
