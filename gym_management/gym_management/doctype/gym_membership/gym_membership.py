@@ -22,6 +22,12 @@ class GymMembership(Document):
     def before_submit(self):
         self.validate_single_active_membership()
 
+    def before_update_after_submit(self):
+        # validate() does not run when a submitted document is edited
+        frozen_days = self.validate_freezes()
+        self.set_end_date(frozen_days)
+        self.set_status()
+
     def on_submit(self):
         self.create_sales_invoice()
         frappe.db.set_value(
