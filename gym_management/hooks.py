@@ -245,4 +245,5 @@ required_apps = ["erpnext"]
 
 fixtures = [
     {"dt": "Role", "filters": [["name", "in", ["Gym Manager", "Front Desk", "Trainer"]]]},
+    {"dt": "Custom Field", "filters": [["name", "in", ["Sales Invoice-gym_membership"]]]},
 ]

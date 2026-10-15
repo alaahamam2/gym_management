@@ -75,7 +75,8 @@
    "label": "Status",
    "no_copy": 1,
    "options": "Draft\nActive\nFrozen\nExpired\nCancelled",
-   "read_only": 1
+   "read_only": 1,
+   "allow_on_submit": 1
   },
   {
    "default": "Today",
@@ -90,14 +91,16 @@
    "in_list_view": 1,
    "label": "End Date",
    "no_copy": 1,
-   "read_only": 1
+   "read_only": 1,
+   "allow_on_submit": 1
   },
   {
    "description": "Only used for class packs",
    "fieldname": "classes_remaining",
    "fieldtype": "Int",
    "label": "Classes Remaining",
-   "no_copy": 1
+   "no_copy": 1,
+   "allow_on_submit": 1
   },
   {
    "fieldname": "section_billing",
@@ -139,7 +142,8 @@
    "fieldname": "freeze_history",
    "fieldtype": "Table",
    "label": "Freeze History",
-   "options": "Membership Freeze"
+   "options": "Membership Freeze",
+   "allow_on_submit": 1
   },
   {
    "fieldname": "amended_from",
