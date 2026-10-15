@@ -1,18 +1,21 @@
 {
  "actions": [],
- "allow_rename": 1,
- "creation": "2026-10-11 17:17:37.668079",
+ "autoname": "format:SESS-{#####}",
+ "creation": "2026-10-14 22:00:00.000000",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "gym_class",
   "trainer",
   "room",
+  "column_break_1",
   "session_date",
   "start_time",
   "end_time",
+  "section_capacity",
   "capacity",
   "booked_count",
+  "column_break_2",
   "status"
  ],
  "fields": [
@@ -20,70 +23,93 @@
    "fieldname": "gym_class",
    "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "gym_class",
+   "in_standard_filter": 1,
+   "label": "Gym Class",
    "options": "Gym Class",
    "reqd": 1
   },
   {
+   "description": "Defaults from the class",
    "fieldname": "trainer",
    "fieldtype": "Link",
-   "label": "trainer",
+   "in_standard_filter": 1,
+   "label": "Trainer",
    "options": "Gym Trainer"
   },
   {
+   "description": "Defaults from the class",
    "fieldname": "room",
    "fieldtype": "Link",
-   "label": "room",
+   "label": "Room",
    "options": "Gym Room"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "session_date",
    "fieldtype": "Date",
    "in_list_view": 1,
-   "label": "session_date",
+   "in_standard_filter": 1,
+   "label": "Session Date",
    "reqd": 1
   },
   {
    "fieldname": "start_time",
    "fieldtype": "Time",
    "in_list_view": 1,
-   "label": "start_time",
+   "label": "Start Time",
    "reqd": 1
   },
   {
+   "description": "Calculated from the class duration",
    "fieldname": "end_time",
    "fieldtype": "Time",
-   "in_list_view": 1,
-   "label": "end_time",
-   "reqd": 1
-  },
-  {
-   "fieldname": "capacity",
-   "fieldtype": "Int",
-   "label": "capacity"
-  },
-  {
-   "default": "0",
-   "fieldname": "booked_count",
-   "fieldtype": "Int",
-   "label": "booked_count",
+   "label": "End Time",
    "read_only": 1
   },
   {
+   "fieldname": "section_capacity",
+   "fieldtype": "Section Break",
+   "label": "Capacity"
+  },
+  {
+   "description": "Defaults from the class. Cannot exceed room capacity",
+   "fieldname": "capacity",
+   "fieldtype": "Int",
+   "label": "Capacity"
+  },
+  {
+   "default": "0",
+   "description": "Maintained by the system",
+   "fieldname": "booked_count",
+   "fieldtype": "Int",
+   "label": "Booked Count",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Scheduled",
    "fieldname": "status",
    "fieldtype": "Select",
-   "label": "status",
-   "options": "Plaintext\nScheduled\nCompleted\nCancelled"
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Scheduled\nCompleted\nCancelled"
   }
  ],
- "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-10-14 22:44:16.130796",
+ "modified": "2026-10-15 10:00:00.000000",
  "modified_by": "Administrator",
  "module": "Gym Management",
  "name": "Class Session",
- "owner": "alaahamam743@gmail.com",
+ "owner": "Administrator",
  "permissions": [
   {
    "create": 1,
@@ -96,11 +122,33 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Gym Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "report": 1,
+   "role": "Front Desk"
+  },
+  {
+   "read": 1,
+   "report": 1,
+   "role": "Trainer"
   }
  ],
  "row_format": "Dynamic",
- "rows_threshold_for_grid_search": 20,
- "sort_field": "modified",
+ "sort_field": "session_date",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "title_field": "gym_class"
 }
