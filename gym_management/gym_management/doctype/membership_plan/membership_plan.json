@@ -1,17 +1,21 @@
 {
  "actions": [],
- "allow_rename": 1,
- "creation": "2026-10-11 16:31:10.395900",
+ "autoname": "field:plan_name",
+ "creation": "2026-10-14 22:00:00.000000",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "plan_name",
   "item",
-  "plan_type",
-  "duration_days",
-  "total_classes",
+  "column_break_1",
+  "is_active",
   "price",
-  "is_active"
+  "section_duration",
+  "duration_type",
+  "duration_value",
+  "column_break_2",
+  "classes_included",
+  "max_freeze_days"
  ],
  "fields": [
   {
@@ -19,50 +23,84 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Plan Name",
-   "reqd": 1
+   "reqd": 1,
+   "unique": 1
   },
   {
+   "description": "Service Item backing this plan. Created automatically if left empty.",
    "fieldname": "item",
    "fieldtype": "Link",
    "label": "Item",
+   "no_copy": 1,
    "options": "Item"
   },
   {
-   "fieldname": "plan_type",
-   "fieldtype": "Select",
-   "label": "Plan Type",
-   "options": "Time-based\nClass-based"
-  },
-  {
-   "fieldname": "duration_days",
-   "fieldtype": "Int",
-   "label": "Duration Days"
-  },
-  {
-   "fieldname": "total_classes",
-   "fieldtype": "Int",
-   "label": "Total Classes"
-  },
-  {
-   "fieldname": "price",
-   "fieldtype": "Currency",
-   "label": "Price"
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
   },
   {
    "default": "1",
    "fieldname": "is_active",
    "fieldtype": "Check",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Is Active"
+  },
+  {
+   "fieldname": "price",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Price",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_duration",
+   "fieldtype": "Section Break",
+   "label": "Duration & Allowance"
+  },
+  {
+   "default": "Months",
+   "fieldname": "duration_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Duration Type",
+   "options": "Days\nMonths\nClass Pack",
+   "reqd": 1
+  },
+  {
+   "description": "e.g. 1 month, 30 days, or 10 classes",
+   "fieldname": "duration_value",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Duration Value",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "description": "0 = unlimited",
+   "fieldname": "classes_included",
+   "fieldtype": "Int",
+   "label": "Classes Included"
+  },
+  {
+   "default": "0",
+   "fieldname": "max_freeze_days",
+   "fieldtype": "Int",
+   "label": "Max Freeze Days"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-10-14 22:44:12.273772",
+ "modified": "2026-10-15 06:00:00.000000",
  "modified_by": "Administrator",
  "module": "Gym Management",
  "name": "Membership Plan",
- "owner": "alaahamam743@gmail.com",
+ "owner": "Administrator",
  "permissions": [
   {
    "create": 1,
@@ -75,11 +113,28 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Gym Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "report": 1,
+   "role": "Front Desk"
   }
  ],
  "row_format": "Dynamic",
- "rows_threshold_for_grid_search": 20,
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "title_field": "plan_name"
 }
