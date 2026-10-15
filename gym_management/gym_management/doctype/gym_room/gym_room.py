@@ -1,9 +1,10 @@
-# Copyright (c) 2026, Alaa Hamam and contributors
-# For license information, please see license.txt
-
-# import frappe
+import frappe
+from frappe import _
 from frappe.model.document import Document
 
 
 class GymRoom(Document):
-	pass
+    def validate(self):
+        if not self.capacity or self.capacity <= 0:
+            frappe.throw(_("Capacity must be greater than zero."))
+			
