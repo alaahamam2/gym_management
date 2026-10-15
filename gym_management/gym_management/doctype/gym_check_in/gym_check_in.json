@@ -1,12 +1,14 @@
 {
  "actions": [],
- "allow_rename": 1,
- "creation": "2026-10-11 17:30:57.669149",
+ "autoname": "format:CHK-{YYYY}-{#####}",
+ "creation": "2026-10-14 22:00:00.000000",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "member",
+  "member_name",
   "membership",
+  "column_break_1",
   "check_in_time",
   "check_out_time",
   "method",
@@ -17,48 +19,67 @@
    "fieldname": "member",
    "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "member",
+   "in_standard_filter": 1,
+   "label": "Member",
    "options": "Gym Member",
    "reqd": 1
   },
   {
+   "fetch_from": "member.member_name",
+   "fieldname": "member_name",
+   "fieldtype": "Data",
+   "label": "Member Name",
+   "read_only": 1
+  },
+  {
+   "description": "Resolved automatically",
    "fieldname": "membership",
    "fieldtype": "Link",
-   "label": "membership",
-   "options": "Gym Membership"
+   "label": "Membership",
+   "no_copy": 1,
+   "options": "Gym Membership",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
   },
   {
    "default": "Now",
    "fieldname": "check_in_time",
    "fieldtype": "Datetime",
-   "label": "check_in_time"
+   "in_list_view": 1,
+   "label": "Check In Time"
   },
   {
    "fieldname": "check_out_time",
    "fieldtype": "Datetime",
-   "label": "check_out_time"
+   "label": "Check Out Time"
   },
   {
+   "default": "Front Desk",
    "fieldname": "method",
    "fieldtype": "Select",
-   "label": "method",
-   "options": "Plaintext\nFront Desk\nQR\nCard"
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Method",
+   "options": "Front Desk\nQR\nCard"
   },
   {
+   "description": "Optional. Marks the booking as Attended",
    "fieldname": "class_booking",
    "fieldtype": "Link",
-   "label": "class_booking",
+   "label": "Class Booking",
    "options": "Class Booking"
   }
  ],
- "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-10-14 22:44:17.044183",
+ "modified": "2026-10-15 13:00:00.000000",
  "modified_by": "Administrator",
  "module": "Gym Management",
  "name": "Gym Check In",
- "owner": "alaahamam743@gmail.com",
+ "owner": "Administrator",
  "permissions": [
   {
    "create": 1,
@@ -71,11 +92,37 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Gym Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Front Desk",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "report": 1,
+   "role": "Trainer"
   }
  ],
  "row_format": "Dynamic",
- "rows_threshold_for_grid_search": 20,
- "sort_field": "modified",
+ "sort_field": "check_in_time",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "title_field": "member_name",
+ "track_changes": 1
 }
