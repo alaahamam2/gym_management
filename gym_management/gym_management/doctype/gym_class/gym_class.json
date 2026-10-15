@@ -1,14 +1,20 @@
 {
  "actions": [],
- "allow_rename": 1,
- "creation": "2026-10-11 16:51:56.502466",
+ "autoname": "field:class_name",
+ "creation": "2026-10-14 22:00:00.000000",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "class_name",
-  "instructor",
-  "capacity",
-  "is_active"
+  "category",
+  "column_break_1",
+  "default_trainer",
+  "default_room",
+  "section_schedule",
+  "duration_minutes",
+  "default_capacity",
+  "section_description",
+  "description"
  ],
  "fields": [
   {
@@ -16,35 +22,70 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Class Name",
-   "reqd": 1
+   "reqd": 1,
+   "unique": 1
   },
   {
-   "fieldname": "instructor",
-   "fieldtype": "Data",
-   "label": "Instructor"
+   "default": "Other",
+   "fieldname": "category",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Category",
+   "options": "Yoga\nHIIT\nSpin\nStrength\nOther"
   },
   {
-   "fieldname": "capacity",
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "default_trainer",
+   "fieldtype": "Link",
+   "label": "Default Trainer",
+   "options": "Gym Trainer"
+  },
+  {
+   "fieldname": "default_room",
+   "fieldtype": "Link",
+   "label": "Default Room",
+   "options": "Gym Room"
+  },
+  {
+   "fieldname": "section_schedule",
+   "fieldtype": "Section Break",
+   "label": "Duration & Capacity"
+  },
+  {
+   "fieldname": "duration_minutes",
    "fieldtype": "Int",
    "in_list_view": 1,
-   "label": "Capacity",
+   "label": "Duration (Minutes)",
    "reqd": 1
   },
   {
-   "default": "1",
-   "fieldname": "is_active",
-   "fieldtype": "Check",
-   "label": "Is Active"
+   "description": "Cannot exceed the capacity of the default room",
+   "fieldname": "default_capacity",
+   "fieldtype": "Int",
+   "label": "Default Capacity"
+  },
+  {
+   "fieldname": "section_description",
+   "fieldtype": "Section Break",
+   "label": "Description"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text Editor",
+   "label": "Description"
   }
  ],
- "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-10-14 22:44:13.398485",
+ "modified": "2026-10-15 09:30:00.000000",
  "modified_by": "Administrator",
  "module": "Gym Management",
  "name": "Gym Class",
- "owner": "alaahamam743@gmail.com",
+ "owner": "Administrator",
  "permissions": [
   {
    "create": 1,
@@ -57,11 +98,32 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Gym Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "report": 1,
+   "role": "Front Desk"
+  },
+  {
+   "read": 1,
+   "role": "Trainer"
   }
  ],
  "row_format": "Dynamic",
- "rows_threshold_for_grid_search": 20,
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "title_field": "class_name"
 }
