@@ -16,26 +16,30 @@
    "fieldtype": "Date",
    "in_list_view": 1,
    "label": "Freeze From",
-   "reqd": 1
+   "reqd": 1,
+   "allow_on_submit": 1
   },
   {
    "fieldname": "freeze_to",
    "fieldtype": "Date",
    "in_list_view": 1,
    "label": "Freeze To",
-   "reqd": 1
+   "reqd": 1,
+   "allow_on_submit": 1
   },
   {
    "fieldname": "days",
    "fieldtype": "Int",
    "in_list_view": 1,
    "label": "Days",
-   "read_only": 1
+   "read_only": 1,
+   "allow_on_submit": 1
   },
   {
    "fieldname": "reason",
    "fieldtype": "Small Text",
-   "label": "Reason"
+   "label": "Reason",
+   "allow_on_submit": 1
   }
  ],
  "index_web_pages_for_search": 1,
