@@ -1,73 +1,145 @@
 {
  "actions": [],
- "allow_rename": 1,
- "creation": "2026-10-11 16:39:47.091999",
+ "allow_import": 1,
+ "autoname": "naming_series:",
+ "creation": "2026-10-14 22:00:00.000000",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "naming_series",
   "member",
   "member_name",
-  "plan",
+  "membership_plan",
+  "column_break_1",
+  "status",
   "start_date",
   "end_date",
-  "status",
   "classes_remaining",
+  "section_billing",
   "sales_invoice",
+  "auto_renew",
+  "column_break_2",
+  "subscription",
+  "section_freeze",
+  "freeze_history",
   "amended_from"
  ],
  "fields": [
   {
+   "default": "GYM-MEM-.YYYY.-.#####",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Series",
+   "no_copy": 1,
+   "options": "GYM-MEM-.YYYY.-.#####",
+   "print_hide": 1,
+   "reqd": 1,
+   "set_only_once": 1
+  },
+  {
    "fieldname": "member",
    "fieldtype": "Link",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Member",
    "options": "Gym Member",
    "reqd": 1
   },
   {
+   "fetch_from": "member.member_name",
    "fieldname": "member_name",
    "fieldtype": "Data",
    "label": "Member Name",
    "read_only": 1
   },
   {
-   "fieldname": "plan",
+   "fieldname": "membership_plan",
    "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Plan",
+   "in_standard_filter": 1,
+   "label": "Membership Plan",
    "options": "Membership Plan",
    "reqd": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "no_copy": 1,
+   "options": "Draft\nActive\nFrozen\nExpired\nCancelled",
+   "read_only": 1
   },
   {
    "default": "Today",
    "fieldname": "start_date",
    "fieldtype": "Date",
-   "in_list_view": 1,
    "label": "Start Date",
    "reqd": 1
   },
   {
    "fieldname": "end_date",
    "fieldtype": "Date",
-   "label": "End Date"
+   "in_list_view": 1,
+   "label": "End Date",
+   "no_copy": 1,
+   "read_only": 1
   },
   {
-   "fieldname": "status",
-   "fieldtype": "Select",
-   "label": "Status",
-   "options": "Draft\nActive\nExpired\nCancelled\nPaused"
-  },
-  {
+   "description": "Only used for class packs",
    "fieldname": "classes_remaining",
    "fieldtype": "Int",
-   "label": "Classes Remaining"
+   "label": "Classes Remaining",
+   "no_copy": 1
+  },
+  {
+   "fieldname": "section_billing",
+   "fieldtype": "Section Break",
+   "label": "Billing"
   },
   {
    "fieldname": "sales_invoice",
    "fieldtype": "Link",
    "label": "Sales Invoice",
+   "no_copy": 1,
    "options": "Sales Invoice",
    "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "auto_renew",
+   "fieldtype": "Check",
+   "label": "Auto Renew"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Only used if ERPNext Subscription is chosen for recurring billing",
+   "fieldname": "subscription",
+   "fieldtype": "Link",
+   "label": "Subscription",
+   "no_copy": 1,
+   "options": "Subscription"
+  },
+  {
+   "fieldname": "section_freeze",
+   "fieldtype": "Section Break",
+   "label": "Freeze History"
+  },
+  {
+   "fieldname": "freeze_history",
+   "fieldtype": "Table",
+   "label": "Freeze History",
+   "options": "Membership Freeze"
   },
   {
    "fieldname": "amended_from",
@@ -80,18 +152,18 @@
    "search_index": 1
   }
  ],
- "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-10-14 22:44:17.987835",
+ "modified": "2026-10-15 07:30:00.000000",
  "modified_by": "Administrator",
  "module": "Gym Management",
  "name": "Gym Membership",
- "owner": "alaahamam743@gmail.com",
+ "owner": "Administrator",
  "permissions": [
   {
    "amend": 1,
+   "cancel": 1,
    "create": 1,
    "delete": 1,
    "email": 1,
@@ -103,11 +175,35 @@
    "share": 1,
    "submit": 1,
    "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Gym Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Front Desk",
+   "write": 1
   }
  ],
  "row_format": "Dynamic",
- "rows_threshold_for_grid_search": 20,
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "title_field": "member_name",
+ "track_changes": 1
 }

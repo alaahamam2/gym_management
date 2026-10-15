@@ -1,8 +1,8 @@
 {
  "actions": [],
- "allow_rename": 1,
- "creation": "2026-10-11 17:07:33.229095",
+ "creation": "2026-10-14 22:00:00.000000",
  "doctype": "DocType",
+ "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
   "freeze_from",
@@ -15,40 +15,39 @@
    "fieldname": "freeze_from",
    "fieldtype": "Date",
    "in_list_view": 1,
-   "label": "freeze_from",
+   "label": "Freeze From",
    "reqd": 1
   },
   {
    "fieldname": "freeze_to",
    "fieldtype": "Date",
    "in_list_view": 1,
-   "label": "freeze_to",
+   "label": "Freeze To",
    "reqd": 1
   },
   {
    "fieldname": "days",
    "fieldtype": "Int",
-   "label": "days",
+   "in_list_view": 1,
+   "label": "Days",
    "read_only": 1
   },
   {
    "fieldname": "reason",
    "fieldtype": "Small Text",
-   "label": "reason"
+   "label": "Reason"
   }
  ],
- "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-10-14 22:44:14.773000",
+ "modified": "2026-10-15 07:00:00.000000",
  "modified_by": "Administrator",
  "module": "Gym Management",
  "name": "Membership Freeze",
- "owner": "alaahamam743@gmail.com",
+ "owner": "Administrator",
  "permissions": [],
  "row_format": "Dynamic",
- "rows_threshold_for_grid_search": 20,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []
