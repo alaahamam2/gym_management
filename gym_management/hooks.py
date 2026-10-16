@@ -156,7 +156,8 @@ app_license = "mit"
 
 scheduler_events = {
     "daily": [
-        "gym_management.tasks.check_expired_memberships"
+        "gym_management.tasks.check_expired_memberships",
+        "gym_management.tasks.send_expiry_reminders",
     ],
 }
 
