@@ -8,6 +8,8 @@ try:
 except ImportError:
     from frappe.tests.utils import FrappeTestCase as TestBase
 
+    test_ignore = ["Subscription", "Sales Invoice"]
+
 
 class TestGymMembership(TestBase):
     def setUp(self):

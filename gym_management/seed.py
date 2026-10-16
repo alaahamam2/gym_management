@@ -43,7 +43,10 @@ MEMBERS = [  # name, plan, start offset (days), frozen now?
 
 def ensure(doctype, name, values):
     if frappe.db.exists(doctype, name):
-        return frappe.get_doc(doctype, name)
+        doc = frappe.get_doc(doctype, name)
+        doc.update(values)  # bring records created earlier (older field layout) up to date
+        doc.save()
+        return doc
     return frappe.get_doc({"doctype": doctype, **values}).insert()
 
 
