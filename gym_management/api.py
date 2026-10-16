@@ -67,3 +67,111 @@ def get_available_sessions(date_from, date_to):
         available.append(s)
 
     return available
+
+    from frappe.utils import add_days, get_first_day, get_last_day, nowdate, strip_html
+
+STAFF_ROLES = ["System Manager", "Gym Manager"]
+DESK_ROLES = ["System Manager", "Gym Manager", "Front Desk"]
+
+
+@frappe.whitelist()
+def get_dashboard_data():
+    """All numbers for the gym-dashboard page in a single call."""
+    frappe.only_for(STAFF_ROLES)
+    today = getdate(nowdate())
+
+    active_members = frappe.db.sql(
+        """select count(distinct member) from `tabGym Membership`
+        where docstatus = 1 and status = 'Active' and end_date >= %s""",
+        (today,),
+    )[0][0]
+
+    expiring = frappe.db.count(
+        "Gym Membership",
+        {"docstatus": 1, "status": "Active", "end_date": ["between", [today, add_days(today, 7)]]},
+    )
+
+    sessions = frappe.db.sql(
+        """select s.name, s.gym_class, s.start_time, s.end_time, s.capacity, s.booked_count, t.trainer_name
+        from `tabClass Session` s left join `tabGym Trainer` t on t.name = s.trainer
+        where s.session_date = %s and s.status != 'Cancelled' order by s.start_time""",
+        (today,),
+        as_dict=True,
+    )
+    for s in sessions:
+        s["fill_rate"] = round(cint(s.booked_count) * 100 / s.capacity) if s.capacity else 0
+
+    revenue = frappe.db.sql(
+        """select coalesce(sum(grand_total), 0) from `tabSales Invoice`
+        where docstatus = 1 and ifnull(gym_membership, '') != '' and posting_date between %s and %s""",
+        (get_first_day(today), get_last_day(today)),
+    )[0][0]
+
+    company = frappe.defaults.get_user_default("Company") or frappe.db.get_value("Company", {}, "name")
+    currency = frappe.get_cached_value("Company", company, "default_currency") if company else None
+
+    return {
+        "active_members": active_members,
+        "expiring_soon": expiring,
+        "sessions": sessions,
+        "revenue": revenue,
+        "currency": currency,
+    }
+
+
+@frappe.whitelist()
+def search_members(query):
+    """Front desk search by name, phone, or member ID (what a QR code encodes)."""
+    frappe.only_for(DESK_ROLES)
+    query = (query or "").strip()
+    if len(query) < 2:
+        return []
+    if frappe.db.exists("Gym Member", query):  # exact ID, e.g. scanned QR
+        query_filters = {"name": query}
+        return frappe.get_list(
+            "Gym Member", filters=query_filters, fields=["name", "member_name", "phone", "status"]
+        )
+    like = f"%{query}%"
+    return frappe.get_list(
+        "Gym Member",
+        or_filters=[["member_name", "like", like], ["phone", "like", like], ["name", "like", like]],
+        fields=["name", "member_name", "phone", "status"],
+        order_by="member_name asc",
+        limit_page_length=8,
+    )
+
+
+@frappe.whitelist()
+def get_member_status(member):
+    """Can this member enter right now? Reuses the exact rules of Gym Check In."""
+    frappe.only_for(DESK_ROLES)
+    info = frappe.db.get_value("Gym Member", member, ["name", "member_name", "phone"], as_dict=True)
+    if not info:
+        frappe.throw(_("Member {0} not found.").format(member))
+
+    entry = frappe.get_doc({"doctype": "Gym Check In", "member": member, "check_in_time": now_datetime()})
+    result = dict(info)
+    try:
+        entry.validate_member()
+        entry.resolve_membership()
+    except frappe.ValidationError as e:
+        frappe.clear_messages()
+        result.update(allowed=0, message=strip_html(str(e)))
+        return result
+
+    m = frappe.db.get_value(
+        "Gym Membership", entry.membership, ["name", "membership_plan", "end_date"], as_dict=True
+    )
+    result.update(
+        allowed=1,
+        membership=m.name,
+        message=_("{0}: valid until {1}").format(m.membership_plan, m.end_date),
+    )
+    return result
+
+
+@frappe.whitelist()
+def check_in_member(member, method="Front Desk"):
+    frappe.only_for(DESK_ROLES)
+    entry = frappe.get_doc({"doctype": "Gym Check In", "member": member, "method": method}).insert()
+    return {"name": entry.name, "membership": entry.membership}

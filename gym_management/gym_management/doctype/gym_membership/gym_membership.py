@@ -58,6 +58,7 @@ class GymMembership(Document):
             {
                 "member": self.member,
                 "docstatus": 1,
+                "end_date": [">=", self.start_date],
                 "status": ["in", ["Active", "Frozen"]],
                 "name": ["!=", self.name],
             },
