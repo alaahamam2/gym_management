@@ -4,6 +4,14 @@ from frappe.model.document import Document
 from frappe.utils import getdate, nowdate, validate_email_address, validate_phone_number
 
 
+def get_non_group(doctype, preferred):
+    """First of `preferred` that exists and is a leaf node, else any leaf node."""
+    for name in preferred:
+        if name and frappe.db.get_value(doctype, name, "is_group") == 0:
+            return name
+    return frappe.db.get_value(doctype, {"is_group": 0}, "name")
+
+
 class GymMember(Document):
     def validate(self):
         self.validate_date_of_birth()
@@ -44,13 +52,19 @@ class GymMember(Document):
             return
 
         selling = frappe.get_cached_doc("Selling Settings")
+        # Group nodes (e.g. "All Customer Groups") are rejected by ERPNext, so use a leaf.
+        customer_group = get_non_group("Customer Group", [selling.customer_group, "Individual"])
+        territory = get_non_group("Territory", [selling.territory])
+        if not customer_group or not territory:
+            frappe.throw(_("Please create a Customer Group and a Territory (not group nodes) first."))
+
         customer = frappe.get_doc(
             {
                 "doctype": "Customer",
                 "customer_name": self.member_name,
                 "customer_type": "Individual",
-                "customer_group": selling.customer_group or "Individual",
-                "territory": selling.territory or "All Territories",
+                "customer_group": customer_group,
+                "territory": territory,
             }
         )
         # Front Desk users cannot create Customers directly, so bypass permissions here.
