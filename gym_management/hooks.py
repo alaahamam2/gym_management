@@ -248,3 +248,13 @@ fixtures = [
     {"dt": "Role", "filters": [["name", "in", ["Gym Manager", "Front Desk", "Trainer"]]]},
     {"dt": "Custom Field", "filters": [["name", "in", ["Sales Invoice-gym_membership"]]]},
 ]
+
+permission_query_conditions = {
+    "Class Session": "gym_management.permissions.class_session_query",
+    "Class Booking": "gym_management.permissions.class_booking_query",
+}
+
+has_permission = {
+    "Class Session": "gym_management.permissions.class_session_has_permission",
+    "Class Booking": "gym_management.permissions.class_booking_has_permission",
+}
