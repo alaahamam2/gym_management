@@ -1,8 +1,21 @@
 import frappe
 from frappe import _
-from frappe.utils import cint, get_datetime, getdate, now_datetime, to_timedelta
+from frappe.utils import (
+    add_days,
+    cint,
+    get_datetime,
+    get_first_day,
+    get_last_day,
+    getdate,
+    now_datetime,
+    nowdate,
+    strip_html,
+    to_timedelta,
+)
 
 MAX_RANGE_DAYS = 93
+STAFF_ROLES = ["System Manager", "Gym Manager"]
+DESK_ROLES = ["System Manager", "Gym Manager", "Front Desk"]
 
 
 @frappe.whitelist()
@@ -68,11 +81,6 @@ def get_available_sessions(date_from, date_to):
 
     return available
 
-    from frappe.utils import add_days, get_first_day, get_last_day, nowdate, strip_html
-
-STAFF_ROLES = ["System Manager", "Gym Manager"]
-DESK_ROLES = ["System Manager", "Gym Manager", "Front Desk"]
-
 
 @frappe.whitelist()
 def get_dashboard_data():
@@ -127,9 +135,8 @@ def search_members(query):
     if len(query) < 2:
         return []
     if frappe.db.exists("Gym Member", query):  # exact ID, e.g. scanned QR
-        query_filters = {"name": query}
         return frappe.get_list(
-            "Gym Member", filters=query_filters, fields=["name", "member_name", "phone", "status"]
+            "Gym Member", filters={"name": query}, fields=["name", "member_name", "phone", "status"]
         )
     like = f"%{query}%"
     return frappe.get_list(

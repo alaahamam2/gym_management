@@ -41,7 +41,7 @@ frappe.pages["gym-dashboard"].on_page_load = function (wrapper) {
 				${card(__("Active Members"), d.active_members, "/app/gym-membership?status=Active&docstatus=1")}
 				${card(__("Expiring in 7 Days"), d.expiring_soon, "/app/query-report/Membership Expiry Report")}
 				${card(__("Sessions Today"), d.sessions.length, "/app/class-session?session_date=" + frappe.datetime.get_today())}
-				${card(__("Revenue This Month"), format_currency(d.revenue, d.currency), "/app/sales-invoice")}
+				${card(__("Revenue This Month"), `${format_currency(d.revenue).replace(/[^\d.,]/g, "").trim()} ${esc(d.currency || "")}`, "/app/sales-invoice")}
 			</div>
 			<h5>${__("Today's Sessions")}</h5>
 			${
