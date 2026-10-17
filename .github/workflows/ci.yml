@@ -1,0 +1,23 @@
+name: Checks
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Check Python syntax
+        run: python -m compileall -q gym_management
+
+      - name: Check JSON files
+        run: |
+          find gym_management -name "*.json" -print0 | xargs -0 -n1 python -c "import json,sys; json.load(open(sys.argv[1]))"
